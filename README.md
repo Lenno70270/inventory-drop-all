@@ -1,9 +1,31 @@
-# Inventory Drop All
+<p align="center">
+  <img src="docs/icon.png" width="128" alt="Inventory Drop All">
+</p>
 
-Eine Fabric-Client-Mod für Minecraft 26.2 und 26.3. Ein Knopf in jedem Inventar-Menü wirft dein ganzes Inventar
-samt Hotbar auf einmal. Rüstung und gesperrte Slots bleiben, wo sie sind.
+<h1 align="center">Inventory Drop All</h1>
 
-Die Mod muss nur bei dir installiert sein, nicht auf dem Server.
+<p align="center">
+  Ein Knopf, und dein ganzes Inventar fliegt raus.<br>
+  Rüstung und gesperrte Slots bleiben, wo sie sind.
+</p>
+
+<p align="center">
+  <a href="https://github.com/Lenno70270/inventory-drop-all/releases/latest"><img src="https://img.shields.io/github/v/release/Lenno70270/inventory-drop-all?label=Download&color=f0aa46" alt="Download"></a>
+  <img src="https://img.shields.io/badge/Minecraft-26.2%20%7C%2026.3-62B47A" alt="Minecraft 26.2 und 26.3">
+  <img src="https://img.shields.io/badge/Loader-Fabric-DBD0B4" alt="Fabric">
+  <img src="https://img.shields.io/badge/Seite-nur%20Client-555" alt="Nur Client">
+  <img src="https://img.shields.io/github/license/Lenno70270/inventory-drop-all" alt="Lizenz MIT">
+</p>
+
+> **English:** A **Drop All** button in every inventory screen throws your whole inventory and hotbar at once.
+> Armor and locked slots stay. Client-side, works on any server.
+
+---
+
+![Drop-All-Knopf im Inventar und in einer Kiste](docs/inventar.png)
+
+<sub>Der Knopf unter dem Inventar und unter einer Kiste. Die Slots mit dem Schloss werden nicht geworfen.
+Screenshots aus dem Spiel.</sub>
 
 ## Bedienen
 
@@ -18,24 +40,28 @@ Die Tasten stehen unter Optionen, Steuerung, Tastenbelegung in der Kategorie „
 
 ## Einstellungen
 
-Im Drop-All-Menü oder über das Zahnrad in [Mod Menu](https://modrinth.com/mod/modmenu):
+Über das Zahnrad neben dem Knopf oder in [Mod Menu](https://modrinth.com/mod/modmenu):
 
-- Knopf anzeigen und Position (unter dem Inventar oder rechts daneben)
-- Was geworfen wird: Hotbar, Inventar, Zweithand, Rüstung (Rüstung ist standardmäßig aus)
-- Sicherheitsabfrage für die Taste: erst beim zweiten Drücken wird geworfen
+![Drop-All-Menü: Allgemein und Gesperrte Slots](docs/menue.png)
+
+- **Allgemein:** Knopf anzeigen, Position (unter dem Inventar oder rechts daneben), Tasten, Sicherheitsabfrage
+  (erst beim zweiten Drücken wird geworfen)
+- **Werfen:** Hotbar, Inventar, Zweithand, Rüstung (Rüstung ist standardmäßig aus)
+- **Gesperrte Slots:** Slots direkt im Raster sperren oder alle auf einmal entsperren
 
 Die Einstellungen liegen in `config/dropallplus.json`, gesperrte Slots in `config/dropallplus-locks.txt`.
 
 Im Kreativ-Inventar wirft Drop All bewusst nichts, weil der Server Kreativ-Drops drosselt und Items sonst
 verschwinden würden.
 
-## Voraussetzungen
+## Installation
 
-- Minecraft 26.2 oder 26.3
-- Fabric Loader 0.19.3 oder neuer
-- [Fabric API](https://modrinth.com/mod/fabric-api)
-- Java 25
-- Optional: [Mod Menu](https://modrinth.com/mod/modmenu) für das Zahnrad
+1. [Fabric Loader](https://fabricmc.net/use/) für Minecraft 26.2 oder 26.3 installieren (Java 25)
+2. [Fabric API](https://modrinth.com/mod/fabric-api) in den `mods`-Ordner legen
+3. Die passende Datei aus den [Releases](https://github.com/Lenno70270/inventory-drop-all/releases/latest) dazulegen:
+   `…+mc26.2.jar` für 26.2, `…+mc26.3.jar` für 26.3
+
+[Mod Menu](https://modrinth.com/mod/modmenu) ist optional und bringt das Zahnrad in der Mod-Liste.
 
 ## Bauen
 
