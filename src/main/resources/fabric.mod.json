@@ -1,0 +1,29 @@
+{
+	"schemaVersion": 1,
+	"id": "dropallplus",
+	"version": "${version}",
+	"name": "Inventory Drop All",
+	"description": "Knopf in jedem Inventar-Menü, der das ganze Inventar samt Hotbar wirft. Rüstung und gesperrte Slots bleiben.",
+	"authors": [
+		"Lennard"
+	],
+	"license": "MIT",
+	"environment": "client",
+	"entrypoints": {
+		"client": [
+			"de.lennard.dropall.DropAllMod"
+		],
+		"modmenu": [
+			"de.lennard.dropall.ModMenuIntegration"
+		]
+	},
+	"mixins": [
+		"dropallplus.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.19.3",
+		"minecraft": "~${mc}",
+		"java": ">=25",
+		"fabric-api": "*"
+	}
+}

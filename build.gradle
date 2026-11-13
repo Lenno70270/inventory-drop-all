@@ -1,0 +1,54 @@
+plugins {
+	id 'net.fabricmc.fabric-loom' version "${loom_version}"
+}
+
+// Eine Quelle, je Minecraft-Version eine eigene Jar.
+def mc = project.mc.toString()
+def apiVersion = [
+	'26.2': '0.161.0+26.2',
+	'26.3': '0.166.2+26.3',
+][mc]
+if (apiVersion == null) {
+	throw new GradleException("Unbekannte Minecraft-Version ${mc}")
+}
+
+base {
+	archivesName = "dropallplus-mc${mc}"
+}
+
+fabricApi {
+	configureTests {
+		createSourceSet = true
+		modId = "dropallplus-test"
+		enableGameTests = false
+		enableClientGameTests = true
+		eula = true
+	}
+}
+
+dependencies {
+	minecraft "com.mojang:minecraft:${mc}"
+	implementation "net.fabricmc:fabric-loader:${project.loader_version}"
+	implementation "net.fabricmc.fabric-api:fabric-api:${apiVersion}"
+
+	// Nur fuer das Zahnrad in Mod Menu. Zur Laufzeit optional.
+	compileOnly files('libs/modmenu-20.0.3.jar')
+}
+
+processResources {
+	def props = [version: project.version, mc: mc]
+	inputs.properties props
+	filesMatching("fabric.mod.json") {
+		expand props
+	}
+}
+
+tasks.withType(JavaCompile).configureEach {
+	it.options.release = 25
+	it.options.encoding = 'UTF-8'
+}
+
+java {
+	sourceCompatibility = JavaVersion.VERSION_25
+	targetCompatibility = JavaVersion.VERSION_25
+}

@@ -1,0 +1,10 @@
+{
+	"key.category.dropallplus.main": "Drop All",
+	"key.dropallplus.drop": "Ganzes Inventar werfen",
+	"key.dropallplus.lock": "Slot sperren / entsperren",
+	"key.dropallplus.menu": "Drop-All-Menü öffnen",
+	"dropallplus.button": "Drop All",
+	"dropallplus.button.tooltip": "Wirft das ganze Inventar samt Hotbar.\nRüstung und gesperrte Slots bleiben.",
+	"dropallplus.menu.tooltip": "Drop-All-Einstellungen",
+	"dropallplus.confirm": "Nochmal drücken, um alles zu werfen"
+}

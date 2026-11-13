@@ -1,0 +1,10 @@
+{
+	"key.category.dropallplus.main": "Drop All",
+	"key.dropallplus.drop": "Drop whole inventory",
+	"key.dropallplus.lock": "Lock / unlock slot",
+	"key.dropallplus.menu": "Open Drop All menu",
+	"dropallplus.button": "Drop All",
+	"dropallplus.button.tooltip": "Drops your whole inventory and hotbar.\nArmor and locked slots stay.",
+	"dropallplus.menu.tooltip": "Drop All settings",
+	"dropallplus.confirm": "Press again to drop everything"
+}
