@@ -5,76 +5,74 @@
 <h1 align="center">Inventory Drop All</h1>
 
 <p align="center">
-  Ein Knopf, und dein ganzes Inventar fliegt raus.<br>
-  Rüstung und gesperrte Slots bleiben, wo sie sind.
+  One button, and your whole inventory is out.<br>
+  Armor and locked slots stay where they are.
 </p>
 
 <p align="center">
   <a href="https://github.com/Lenno70270/inventory-drop-all/releases/latest"><img src="https://img.shields.io/github/v/release/Lenno70270/inventory-drop-all?label=Download&color=f0aa46" alt="Download"></a>
-  <img src="https://img.shields.io/badge/Minecraft-26.2%20%7C%2026.3-62B47A" alt="Minecraft 26.2 und 26.3">
+  <img src="https://img.shields.io/badge/Minecraft-26.2%20%7C%2026.3-62B47A" alt="Minecraft 26.2 and 26.3">
   <img src="https://img.shields.io/badge/Loader-Fabric-DBD0B4" alt="Fabric">
-  <img src="https://img.shields.io/badge/Seite-nur%20Client-555" alt="Nur Client">
-  <img src="https://img.shields.io/github/license/Lenno70270/inventory-drop-all" alt="Lizenz MIT">
+  <img src="https://img.shields.io/badge/Side-client%20only-555" alt="Client only">
+  <img src="https://img.shields.io/github/license/Lenno70270/inventory-drop-all" alt="License MIT">
 </p>
-
-> **English:** A **Drop All** button in every inventory screen throws your whole inventory and hotbar at once.
-> Armor and locked slots stay. Client-side, works on any server.
 
 ---
 
-![Drop-All-Knopf im Inventar und in einer Kiste](docs/inventar.png)
+![Drop All button in the inventory and in a chest](docs/inventory.png)
 
-<sub>Der Knopf unter dem Inventar und unter einer Kiste. Die Slots mit dem Schloss werden nicht geworfen.
-Screenshots aus dem Spiel.</sub>
+<sub>The button below the inventory and below a chest. Slots with a padlock are never dropped. In-game screenshots.</sub>
 
-## Bedienen
+## How to use
 
-| Eingabe | Was passiert |
+| Input | What happens |
 | --- | --- |
-| Knopf **Drop All** im Inventar | Wirft alles, was nicht gesperrt ist |
-| **Mittlere Maustaste** auf einen Slot | Slot sperren oder entsperren, gesperrte Slots bekommen ein Schloss |
-| Eigene Taste (frei belegbar) | Ganzes Inventar werfen, ohne den Knopf zu klicken |
-| Eigene Taste (frei belegbar) | Drop-All-Menü öffnen |
+| **Drop All** button in your inventory | Drops everything that isn't locked |
+| **Middle mouse button** on a slot | Lock or unlock the slot, locked slots show a padlock |
+| Your own key (unbound by default) | Drop everything without clicking the button |
+| Your own key (unbound by default) | Open the Drop All menu |
 
-Die Tasten stehen unter Optionen, Steuerung, Tastenbelegung in der Kategorie „Drop All“.
+The keys are under Options, Controls, Key Binds in the "Drop All" category.
 
-## Einstellungen
+## Settings
 
-Über das Zahnrad neben dem Knopf oder in [Mod Menu](https://modrinth.com/mod/modmenu):
+Via the gear next to the button or in [Mod Menu](https://modrinth.com/mod/modmenu):
 
-![Drop-All-Menü: Allgemein und Gesperrte Slots](docs/menue.png)
+![Drop All menu: General and Locked slots](docs/menu.png)
 
-- **Allgemein:** Knopf anzeigen, Position (unter dem Inventar oder rechts daneben), Tasten, Sicherheitsabfrage
-  (erst beim zweiten Drücken wird geworfen)
-- **Werfen:** Hotbar, Inventar, Zweithand, Rüstung (Rüstung ist standardmäßig aus)
-- **Gesperrte Slots:** Slots direkt im Raster sperren oder alle auf einmal entsperren
+- **General:** show the button, its position (below the inventory or to the right), keys, and a safety check (the key
+  only drops on the second press)
+- **Drop:** hotbar, inventory, offhand, armor (armor is off by default)
+- **Locked slots:** lock slots right in the grid, or unlock all at once
 
-Die Einstellungen liegen in `config/dropallplus.json`, gesperrte Slots in `config/dropallplus-locks.txt`.
+Settings are stored in `config/dropallplus.json`, locked slots in `config/dropallplus-locks.txt`.
 
-Im Kreativ-Inventar wirft Drop All bewusst nichts, weil der Server Kreativ-Drops drosselt und Items sonst
-verschwinden würden.
+In the creative inventory, Drop All does nothing on purpose, because the server throttles creative drops and items
+could disappear.
+
+The mod is available in English and German, depending on your game language.
 
 ## Installation
 
-1. [Fabric Loader](https://fabricmc.net/use/) für Minecraft 26.2 oder 26.3 installieren (Java 25)
-2. [Fabric API](https://modrinth.com/mod/fabric-api) in den `mods`-Ordner legen
-3. Die passende Datei aus den [Releases](https://github.com/Lenno70270/inventory-drop-all/releases/latest) dazulegen:
-   `…+mc26.2.jar` für 26.2, `…+mc26.3.jar` für 26.3
+1. Install [Fabric Loader](https://fabricmc.net/use/) for Minecraft 26.2 or 26.3 (Java 25)
+2. Put [Fabric API](https://modrinth.com/mod/fabric-api) into your `mods` folder
+3. Add the matching file from the [releases](https://github.com/Lenno70270/inventory-drop-all/releases/latest):
+   `…+mc26.2.jar` for 26.2, `…+mc26.3.jar` for 26.3
 
-[Mod Menu](https://modrinth.com/mod/modmenu) ist optional und bringt das Zahnrad in der Mod-Liste.
+[Mod Menu](https://modrinth.com/mod/modmenu) is optional and adds the gear to the mod list.
 
-## Bauen
+## Building
 
-Mod Menu wird nur zum Kompilieren gebraucht und liegt nicht im Repository. Lade `modmenu-20.0.3.jar` von
-[Modrinth](https://modrinth.com/mod/modmenu) und leg sie nach `libs/`. Dann:
+Mod Menu is only needed to compile and isn't in the repository. Download `modmenu-20.0.3.jar` from
+[Modrinth](https://modrinth.com/mod/modmenu) and put it into `libs/`. Then:
 
 ```bash
-./gradlew build          # für 26.2
+./gradlew build          # for 26.2
 ./gradlew build -Pmc=26.3
 ```
 
-Die fertige Datei liegt danach in `build/libs/`.
+The finished file is in `build/libs/`.
 
-## Lizenz
+## License
 
-MIT, siehe [LICENSE](LICENSE).
+MIT, see [LICENSE](LICENSE).

@@ -3,7 +3,7 @@
 	"id": "dropallplus",
 	"version": "${version}",
 	"name": "Inventory Drop All",
-	"description": "Knopf in jedem Inventar-Menü, der das ganze Inventar samt Hotbar wirft. Rüstung und gesperrte Slots bleiben.",
+	"description": "A button in every inventory screen that drops your whole inventory including the hotbar. Armor and locked slots stay.",
 	"authors": [
 		"Lennard"
 	],

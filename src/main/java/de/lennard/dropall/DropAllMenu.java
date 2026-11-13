@@ -50,9 +50,14 @@ public final class DropAllMenu extends Screen {
 	/** Ruestung von oben nach unten wie im Inventar: Kopf, Brust, Beine, Fuesse. */
 	private static final int[] ARMOR = {39, 38, 37, 36};
 
-	private static final String GRID_TOOLTIP = "Klick auf einen Slot sperrt oder entsperrt ihn. Gesperrte Slots wirft Drop All nie, auch nicht per Taste. "
-			+ "Oben: Rüstung und rechts die Zweithand. Darunter das Inventar, ganz unten die Hotbar. "
-			+ "Im Spiel geht das genauso mit der Sperr-Taste über einem Slot.";
+	/** Übersetzter Text. Die Texte stehen in assets/dropallplus/lang. */
+	private static String t(String key, Object... args) {
+		return Component.translatable(key, args).getString();
+	}
+
+	private static String gridTooltip() {
+		return t("dropallplus.menu.grid.tooltip");
+	}
 
 	private abstract static class Row {
 		final String label;
@@ -102,9 +107,9 @@ public final class DropAllMenu extends Screen {
 		@Override
 		String value() {
 			if (capturing == this) {
-				return "> Taste drücken <";
+				return t("dropallplus.menu.key.press");
 			}
-			return mapping.isUnbound() ? "Nicht belegt" : mapping.getTranslatedKeyMessage().getString();
+			return mapping.isUnbound() ? t("dropallplus.menu.key.unbound") : mapping.getTranslatedKeyMessage().getString();
 		}
 
 		@Override
@@ -147,37 +152,35 @@ public final class DropAllMenu extends Screen {
 	private void buildPages() {
 		DropAllConfig c = DropAllMod.config;
 		pages.clear();
-		pages.add(new Page("Allgemein", List.of(
+		pages.add(new Page(t("dropallplus.menu.page.general"), List.of(
 				List.of(
-						toggle("Drop-All-Knopf anzeigen", "Zeigt den Drop-All-Knopf in jedem Menü mit deinem Inventar: Inventar, Kisten, Shulker, Öfen, Server-Menüs wie /shop. "
-								+ "Das Zahnrad für dieses Menü bleibt auch ohne Knopf da.", () -> c.showButton, v -> c.showButton = v),
-						cycle("Knopf-Position", "Wo der Knopf sitzt. Passt er unten nicht hin, zum Beispiel bei einer großen Kiste in einem kleinen Fenster, rückt er automatisch nach rechts.",
-								List.of(DropAllConfig.POSITION_BELOW, DropAllConfig.POSITION_RIGHT), v -> v == DropAllConfig.POSITION_RIGHT ? "Rechts daneben" : "Unter dem Menü",
+						toggle(t("dropallplus.menu.show_button"), t("dropallplus.menu.show_button.tooltip"), () -> c.showButton, v -> c.showButton = v),
+						cycle(t("dropallplus.menu.button_position"), t("dropallplus.menu.button_position.tooltip"),
+								List.of(DropAllConfig.POSITION_BELOW, DropAllConfig.POSITION_RIGHT), v -> v == DropAllConfig.POSITION_RIGHT ? t("dropallplus.menu.position.right") : t("dropallplus.menu.position.below"),
 								() -> c.buttonPosition, v -> c.buttonPosition = v)),
 				List.of(
-						new KeyRow("Drop-All-Taste", "Wirft dein Inventar mit einem Tastendruck, im Spiel und in jedem Menü. Klicken, dann die Taste drücken. Esc löscht die Belegung. "
-								+ "Geht auch unter Optionen, Steuerung, Tastenbelegung, Drop All.", DropAllMod.drop),
-						toggle("Taste zweimal drücken", "Sicherheitsabfrage: Die Drop-All-Taste muss innerhalb von 1,5 Sekunden zweimal gedrückt werden. Gegen Versehen im Kampf. Der Knopf wirft immer sofort.",
+						new KeyRow(t("dropallplus.menu.drop_key"), t("dropallplus.menu.drop_key.tooltip"), DropAllMod.drop),
+						toggle(t("dropallplus.menu.confirm"), t("dropallplus.menu.confirm.tooltip"),
 								() -> c.hotkeyConfirm, v -> c.hotkeyConfirm = v)),
 				List.of(
-						new KeyRow("Slot sperren", "Maus über einen Slot in deinem Inventar und diese Taste drücken. Dann ist ein Schloss davor und Drop All lässt ihn aus. Nochmal drücken entsperrt.", DropAllMod.lock),
-						new KeyRow("Dieses Menü öffnen", "Öffnet dieses Menü im Spiel. Im Inventar geht es auch über das Zahnrad neben dem Drop-All-Knopf.", DropAllMod.menu))),
+						new KeyRow(t("dropallplus.menu.lock_key"), t("dropallplus.menu.lock_key.tooltip"), DropAllMod.lock),
+						new KeyRow(t("dropallplus.menu.menu_key"), t("dropallplus.menu.menu_key.tooltip"), DropAllMod.menu))),
 				false));
 
-		pages.add(new Page("Werfen", List.of(
+		pages.add(new Page(t("dropallplus.menu.page.drop"), List.of(
 				List.of(
-						toggle("Hotbar", "Die neun Slots unten.", () -> c.dropHotbar, v -> c.dropHotbar = v),
-						toggle("Inventar", "Die 27 Slots über der Hotbar.", () -> c.dropInventory, v -> c.dropInventory = v),
-						toggle("Zweithand", "Das Item in der linken Hand, zum Beispiel Schild oder Totem.", () -> c.dropOffhand, v -> c.dropOffhand = v),
-						toggle("Rüstung", "Auch die angezogene Rüstung. Geht nur im normalen Inventar und per Taste ohne offenes Menü, weil Kisten keine Rüstungsslots zeigen.",
+						toggle(t("dropallplus.menu.drop.hotbar"), t("dropallplus.menu.drop.hotbar.tooltip"), () -> c.dropHotbar, v -> c.dropHotbar = v),
+						toggle(t("dropallplus.menu.drop.inventory"), t("dropallplus.menu.drop.inventory.tooltip"), () -> c.dropInventory, v -> c.dropInventory = v),
+						toggle(t("dropallplus.menu.drop.offhand"), t("dropallplus.menu.drop.offhand.tooltip"), () -> c.dropOffhand, v -> c.dropOffhand = v),
+						toggle(t("dropallplus.menu.drop.armor"), t("dropallplus.menu.drop.armor.tooltip"),
 								() -> c.dropArmor, v -> c.dropArmor = v))),
 				false));
 
-		pages.add(new Page("Gesperrte Slots", List.of(
+		pages.add(new Page(t("dropallplus.menu.page.locked"), List.of(
 				List.of(
-						info("Gesperrt", "Wie viele Slots gerade gesperrt sind. Die Sperre gilt für den Slot, nicht für das Item, und auf allen Servern und Welten.",
-								() -> Locks.count() == 1 ? "1 Slot" : Locks.count() + " Slots"),
-						action("Alle entsperren", "Hebt jede Sperre auf.", Locks::clear))),
+						info(t("dropallplus.menu.locked"), t("dropallplus.menu.locked.tooltip"),
+								() -> Locks.count() == 1 ? t("dropallplus.menu.locked.one") : t("dropallplus.menu.locked.many", Locks.count())),
+						action(t("dropallplus.menu.unlock_all"), t("dropallplus.menu.unlock_all.tooltip"), Locks::clear))),
 				true));
 	}
 
@@ -204,7 +207,7 @@ public final class DropAllMenu extends Screen {
 		return new Row(label, tooltip) {
 			@Override
 			String value() {
-				return "Ausführen";
+				return t("dropallplus.menu.run");
 			}
 
 			@Override
@@ -363,24 +366,25 @@ public final class DropAllMenu extends Screen {
 	private static String slotTooltip(int index, Inventory inventory) {
 		String name;
 		if (index < DropAll.HOTBAR_END) {
-			name = "Hotbar " + (index + 1);
+			name = t("dropallplus.menu.slot.hotbar", index + 1);
 		} else if (index < DropAll.ARMOR_START) {
-			name = "Inventar " + (index - DropAll.HOTBAR_END + 1);
+			name = t("dropallplus.menu.slot.inventory", index - DropAll.HOTBAR_END + 1);
 		} else if (index == Inventory.SLOT_OFFHAND) {
-			name = "Zweithand";
+			name = t("dropallplus.menu.drop.offhand");
 		} else {
 			name = switch (index) {
-				case 39 -> "Helm";
-				case 38 -> "Brustpanzer";
-				case 37 -> "Hose";
-				default -> "Schuhe";
+				case 39 -> t("dropallplus.menu.slot.helmet");
+				case 38 -> t("dropallplus.menu.slot.chestplate");
+				case 37 -> t("dropallplus.menu.slot.leggings");
+				default -> t("dropallplus.menu.slot.boots");
 			};
 		}
 		String item = "";
 		if (inventory != null && !inventory.getItem(index).isEmpty()) {
-			item = " mit " + inventory.getItem(index).getHoverName().getString();
+			item = t("dropallplus.menu.slot.with", inventory.getItem(index).getHoverName().getString());
 		}
-		return name + item + ": " + (Locks.isLocked(index) ? "gesperrt, wird nie geworfen." : "frei.") + " Klick schaltet um.\n\n" + GRID_TOOLTIP;
+		return t("dropallplus.menu.slot.tooltip", name + item, t(Locks.isLocked(index) ? "dropallplus.menu.slot.locked" : "dropallplus.menu.slot.free"))
+				+ "\n\n" + gridTooltip();
 	}
 
 	private void drawRow(Row row, int x, int y, int w, boolean hover) {
@@ -429,8 +433,8 @@ public final class DropAllMenu extends Screen {
 
 	private void footer(int mx, int my) {
 		int y = height - MARGIN - ROW;
-		button("Fertig", width - MARGIN - BUTTON_WIDTH, y, mx, my, this::onClose);
-		button("Standard", width - MARGIN - BUTTON_WIDTH * 2 - 4, y, mx, my, () -> {
+		button(t("dropallplus.menu.done"), width - MARGIN - BUTTON_WIDTH, y, mx, my, this::onClose);
+		button(t("dropallplus.menu.defaults"), width - MARGIN - BUTTON_WIDTH * 2 - 4, y, mx, my, () -> {
 			DropAllMod.config.resetToDefaults();
 			DropAllMod.config.save();
 		});

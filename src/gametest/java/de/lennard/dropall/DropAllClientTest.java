@@ -14,6 +14,7 @@ import net.minecraft.client.gui.screens.inventory.ContainerScreen;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -109,10 +110,10 @@ public class DropAllClientTest implements FabricClientGameTest {
 			ctx.waitTicks(10);
 			ctx.takeScreenshot("dropall-menue-allgemein");
 			DropAllMenu menu = ctx.computeOnClient(mc -> (DropAllMenu) mc.gui.screen());
-			ctx.runOnClient(mc -> menu.showPage("Werfen"));
+			ctx.runOnClient(mc -> menu.showPage(Component.translatable("dropallplus.menu.page.drop").getString()));
 			ctx.waitTicks(5);
 			ctx.takeScreenshot("dropall-menue-werfen");
-			ctx.runOnClient(mc -> menu.showPage("Gesperrte Slots"));
+			ctx.runOnClient(mc -> menu.showPage(Component.translatable("dropallplus.menu.page.locked").getString()));
 			ctx.waitTicks(5);
 			check(ctx.computeOnClient(mc -> menu.press("slot:9")), "Slot 9 im Raster anklickbar");
 			check(ctx.computeOnClient(mc -> Locks.isLocked(9)), "Slot 9 im Menü gesperrt");
@@ -122,14 +123,14 @@ public class DropAllClientTest implements FabricClientGameTest {
 			System.out.println("[DropAllTest] OK Menü: Seiten, Sperren per Klick");
 
 			// Taste im Menue neu belegen.
-			ctx.runOnClient(mc -> menu.showPage("Allgemein"));
+			ctx.runOnClient(mc -> menu.showPage(Component.translatable("dropallplus.menu.page.general").getString()));
 			ctx.waitTicks(5);
-			check(ctx.computeOnClient(mc -> menu.press("Drop-All-Taste")), "Tastenzeile anklickbar");
+			check(ctx.computeOnClient(mc -> menu.press(Component.translatable("dropallplus.menu.drop_key").getString())), "Tastenzeile anklickbar");
 			ctx.getInput().pressKey(InputConstants.getKey("key.keyboard.h"));
 			ctx.waitTicks(5);
 			check(ctx.computeOnClient(mc -> DropAllMod.drop.saveString().equals("key.keyboard.h")), "Taste im Menü auf H gesetzt, war " + ctx.computeOnClient(mc -> DropAllMod.drop.saveString()));
 			System.out.println("[DropAllTest] OK Taste im Menü neu belegt");
-			check(ctx.computeOnClient(mc -> menu.press("Fertig")), "Fertig anklickbar");
+			check(ctx.computeOnClient(mc -> menu.press(Component.translatable("dropallplus.menu.done").getString())), "Fertig anklickbar");
 			ctx.waitForScreen(InventoryScreen.class);
 			System.out.println("[DropAllTest] OK Fertig führt zurück ins Inventar");
 
